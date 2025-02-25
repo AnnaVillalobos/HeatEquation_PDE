@@ -1,0 +1,260 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Wolfram 14.2' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       154,          7]
+NotebookDataLength[      9757,        250]
+NotebookOptionsPosition[      9269,        233]
+NotebookOutlinePosition[      9669,        249]
+CellTagsIndexPosition[      9626,        246]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "\"\<Global`*\>\"", "]"}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"pde", "=", 
+   RowBox[{
+    RowBox[{"D", "[", 
+     RowBox[{
+      RowBox[{"u", "[", 
+       RowBox[{"x", ",", "t"}], "]"}], ",", "t"}], "]"}], "==", 
+    RowBox[{"k", "*", 
+     RowBox[{"D", "[", 
+      RowBox[{
+       RowBox[{"u", "[", 
+        RowBox[{"x", ",", "t"}], "]"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"x", ",", "2"}], "}"}]}], "]"}]}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"bc", "=", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"u", "[", 
+       RowBox[{"0", ",", "t"}], "]"}], "==", "0"}], ",", 
+     RowBox[{
+      RowBox[{"u", "[", 
+       RowBox[{"L", ",", "t"}], "]"}], "==", "0"}]}], "}"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"ic", "=", 
+   RowBox[{
+    RowBox[{"u", "[", 
+     RowBox[{"x", ",", "0"}], "]"}], "==", 
+    RowBox[{"f", "[", "x", "]"}]}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{"sol", "=", 
+   RowBox[{"DSolveValue", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"pde", ",", "ic", ",", "bc"}], "}"}], ",", 
+     RowBox[{"u", "[", 
+      RowBox[{"x", ",", "t"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "t"}], "}"}]}], "]"}]}], ";"}], "\n", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"sol", "=", 
+    RowBox[{"sol", "/.", " ", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"K", "[", "1", "]"}], "->", "n"}], ",", 
+       RowBox[{"Infinity", "->", "20"}]}], "}"}]}]}], ";"}], "\n"}], "\[IndentingNewLine]", 
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Module", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"currentSol", ",", "g"}], "}"}], ",", 
+     RowBox[{
+      RowBox[{"currentSol", "=", 
+       RowBox[{"Activate", "[", 
+        RowBox[{"sol", "/.", " ", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"f", "[", "x", "]"}], "->", 
+            RowBox[{"Sin", "[", "x", "]"}]}], ",", 
+           RowBox[{"L", "->", "L0"}], ",", 
+           RowBox[{"k", "->", "k0"}]}], "}"}]}], "]"}]}], ";", 
+      "\[IndentingNewLine]", 
+      RowBox[{"g", "=", 
+       RowBox[{"Grid", "[", 
+        RowBox[{"{", 
+         RowBox[{
+          RowBox[{"{", 
+           RowBox[{"Row", "[", 
+            RowBox[{"{", 
+             RowBox[{"\"\<time = \>\"", ",", "t0"}], "}"}], "]"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"Quiet", "[", 
+            RowBox[{"DensityPlot", "[", 
+             RowBox[{
+              RowBox[{"Evaluate", "[", 
+               RowBox[{"currentSol", "/.", " ", 
+                RowBox[{"t", "->", "t0"}]}], "]"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"x", ",", "0", ",", "L0"}], "}"}], ",", 
+              RowBox[{"{", 
+               RowBox[{"y", ",", "0", ",", "1"}], "}"}], ",", 
+              RowBox[{"ColorFunction", "->", 
+               RowBox[{"Function", "[", 
+                RowBox[{
+                 RowBox[{"{", "val", "}"}], ",", 
+                 RowBox[{
+                  RowBox[{"ColorData", "[", "\"\<TemperatureMap\>\"", "]"}], "[", 
+                  RowBox[{"Rescale", "[", 
+                   RowBox[{"val", ",", 
+                    RowBox[{"{", 
+                    RowBox[{
+                    RowBox[{"-", "1"}], ",", "1"}], "}"}], ",", 
+                    RowBox[{"{", 
+                    RowBox[{"0", ",", "1"}], "}"}]}], "]"}], "]"}]}], "]"}]}],
+               ",", 
+              RowBox[{"ColorFunctionScaling", "->", "False"}], ",", 
+              RowBox[{"AspectRatio", "->", 
+               RowBox[{"1", "/", "10"}]}], ",", 
+              RowBox[{"ImageSize", "->", "300"}]}], "]"}], "]"}], "}"}]}], 
+         "}"}], "]"}]}], ";", "\[IndentingNewLine]", "g"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"L0", ",", "3", ",", "\"\<Length?\>\""}], "}"}], ",", "1", ",", 
+     
+     RowBox[{"4", "*", "Pi"}], ",", "0.1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"k0", ",", "1", ",", "\"\<Thermal conductivity?\>\""}], "}"}], ",",
+      "0.01", ",", ".1", ",", "1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"t0", ",", "0.01", ",", "\"\<time?\>\""}], "}"}], ",", "0.01", ",",
+      "100", ",", ".1", ",", 
+     RowBox[{"Appearance", "->", "\"\<Labeled\>\""}]}], "}"}], ",", 
+   RowBox[{"TrackedSymbols", ":>", 
+    RowBox[{"{", 
+     RowBox[{"L0", ",", "k0", ",", "t0"}], "}"}]}]}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.949392487030266*^9, 3.949392487033729*^9}, {
+   3.9493926348902884`*^9, 3.949392653021391*^9}, 3.949393024661179*^9, {
+   3.949460627583013*^9, 3.949460629039907*^9}, {3.949460720729292*^9, 
+   3.949460723870812*^9}, {3.949460815566584*^9, 3.9494608157941513`*^9}, {
+   3.949460945095129*^9, 3.9494609477535677`*^9}, {3.949466258996984*^9, 
+   3.9494662924597692`*^9}},
+ CellLabel->"In[22]:=",ExpressionUUID->"388b8668-4db4-410c-a19c-b64aa2372511"],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`k0$$ = 1, $CellContext`L0$$ = 
+    3, $CellContext`t0$$ = 0.01, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`L0$$], 3, "Length?"}, 1, 4 Pi, 0.1, ControlType -> 
+      Manipulator}, {{
+       Hold[$CellContext`k0$$], 1, "Thermal conductivity?"}, 0.01, 0.1, 1, 
+      ControlType -> Manipulator}, {{
+       Hold[$CellContext`t0$$], 0.01, "time?"}, 0.01, 100, 0.1, ControlType -> 
+      Manipulator}}, Typeset`size$$ = {
+    300., {29.863336914062508`, 35.59527050781251}}, Typeset`update$$ = 0, 
+    Typeset`initDone$$, Typeset`skipInitDone$$ = True, 
+    Typeset`keyframeActionsQ$$ = False, Typeset`keyframeList$$ = {}}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`k0$$ = 1, $CellContext`L0$$ = 
+        3, $CellContext`t0$$ = 0.01}, "ControllerVariables" :> {}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$, Typeset`keyframeActionsQ$$, 
+        Typeset`keyframeList$$}, "Body" :> 
+      Module[{$CellContext`currentSol$, $CellContext`g$}, \
+$CellContext`currentSol$ = Activate[
+           
+           ReplaceAll[$CellContext`sol, {$CellContext`f[$CellContext`x] -> 
+             Sin[$CellContext`x], $CellContext`L -> $CellContext`L0$$, \
+$CellContext`k -> $CellContext`k0$$}]]; $CellContext`g$ = Grid[{{
+             Row[{"time = ", $CellContext`t0$$}]}, {
+             Quiet[
+              DensityPlot[
+               Evaluate[
+                
+                ReplaceAll[$CellContext`currentSol$, $CellContext`t -> \
+$CellContext`t0$$]], {$CellContext`x, 0, $CellContext`L0$$}, {$CellContext`y, 
+                0, 1}, ColorFunction -> Function[{$CellContext`val}, 
+                 ColorData["TemperatureMap"][
+                  Rescale[$CellContext`val, {-1, 1}, {0, 1}]]], 
+               ColorFunctionScaling -> False, AspectRatio -> 1/10, ImageSize -> 
+               300]]}}]; $CellContext`g$], 
+      "Specifications" :> {{{$CellContext`L0$$, 3, "Length?"}, 1, 4 Pi, 0.1, 
+         Appearance -> 
+         "Labeled"}, {{$CellContext`k0$$, 1, "Thermal conductivity?"}, 0.01, 
+         0.1, 1, Appearance -> 
+         "Labeled"}, {{$CellContext`t0$$, 0.01, "time?"}, 0.01, 100, 0.1, 
+         Appearance -> "Labeled"}}, 
+      "Options" :> {
+       TrackedSymbols :> {$CellContext`L0$$, $CellContext`k0$$, \
+$CellContext`t0$$}}, "DefaultOptions" :> {}],
+     ImageSizeCache->{
+      378.85912109375, {107.13376232910157`, 112.86569592285157`}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UndoTrackedVariables:>{Typeset`show$$, Typeset`bookmarkMode$$},
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.9493925254622383`*^9, 3.949392683737073*^9, 
+  3.949392721640608*^9, 3.949393073403324*^9, 3.949460668447113*^9, 
+  3.9494607782338943`*^9, 3.9494608569155273`*^9, 3.949460985672701*^9, 
+  3.9494662975171537`*^9, 3.9494663357576942`*^9, 3.9494734893306627`*^9},
+ CellLabel->"Out[28]=",ExpressionUUID->"1535eaaa-4e65-496f-8d6e-5dbfd89d9d6f"]
+}, Open  ]]
+},
+WindowSize->{Full, Full},
+WindowMargins->{{352, Automatic}, {Automatic, 50}},
+FrontEndVersion->"14.2 for Mac OS X ARM (64-bit) (December 26, 2024)",
+StyleDefinitions->"Default.nb",
+ExpressionUUID->"1e6c16d0-2e64-452a-b8f5-0846f587c98c"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[576, 22, 5038, 136, 335, "Input",ExpressionUUID->"388b8668-4db4-410c-a19c-b64aa2372511"],
+Cell[5617, 160, 3636, 70, 255, "Output",ExpressionUUID->"1535eaaa-4e65-496f-8d6e-5dbfd89d9d6f"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+
